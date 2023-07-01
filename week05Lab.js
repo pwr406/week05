@@ -201,6 +201,11 @@ class Teacher extends Person {
  * Step 4: Call the introduction method on your new teacher instance AND the details method, make sure that the results are printed to the console.
  *
  * ↓ YOUR CODE HERE ↓ */
+let student = new Student('Jacky', 'student');
+let teacher = new Teacher('Mr. Bean', 'teacher');
+console.log(student.introduction(), student.details());
+console.log(teacher.introduction());
+console.log(teacher.details());
 
 /*-------------------------------------------------------*/
 // Question 6: Inheritance
