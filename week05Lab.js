@@ -233,6 +233,15 @@ class Parent {
  *
  * ↓ YOUR CODE HERE ↓ */
 
+class Child extends Parent {
+  constructor (name, age) {
+    super(name, age);
+  }
+}
+
+let child = new Child ('Pugsley', 10);
+child.details();
+
 /*-------------------------------------------------------*/
 // Question 7: Put it all together
 console.log(`--------------------------
@@ -251,5 +260,44 @@ Question 7: Put it all together \n`)
  * Step 10: Display the movies information to the console, using the new instance list
  *
  * ↓ YOUR CODE HERE ↓ */
+class Movie {
+  constructor(title, director) {
+    this.title = title
+    this.director = director
+  }
+    describe() {
+      return `The movie ${this.title} was directed by ${this.director}.`
+    }
+  }
+
+  class List {
+    constructor() {
+      this.movies = [];
+    }
+
+    addMovie(movie){
+      this.movies.push(movie);
+    }
+
+    displayMovies() {
+      let movieInfo = "";
+      for (let i = 0; i < this.movies.length; i++) {
+        movieInfo += `${this.movies[i].title}, directed by ${this.movies[i]}`;
+         
+      }
+      return movieInfo;  
+    }
+  }
+let movie1 = new Movie (`Jurassic Park`, `Steven Spielberg`);
+let movie2 = new Movie (`How the Grinch stole Christmas`, `Ron Howard`)
+
+console.log(movie1.describe())
+console.log(movie2.describe())
+
+let list = new List;
+list.addMovie(movie1);
+list.addMovie(movie2);
+console.log(list.displayMovies());
+
 
 console.log(`-----------Finished------------`)
