@@ -1,12 +1,12 @@
 //Albums and songs on Albums
 class Song {
-    constructor (name, length) {
+    constructor (name, songLength) {
         this.name = name;
-        this.length = length;
+        this.songLength = songLength;
     }
 
     describe() {
-        return `${this.name} is ${this.length} long`;
+        return `${this.name} is ${this.songLength} long`;
     }
 }
 
@@ -15,11 +15,13 @@ class Album {
         this.name = name;
         this.artist = artist;
         this.songs = [];
+        this.totalRunTime = 0 ;
     }
 
     addSong(song) {
         if (song instanceof Song) {
             this.songs.push(song);
+            this.totalRunTime += parseInt(song.songLength, 10);
         } else {
             throw new Error(`You can only add an instance of Song. 
             Argument is not a song: ${song}`)
@@ -27,7 +29,7 @@ class Album {
     }
 
     describe() {
-        return `${this.name} by ${this.artist} has ${this.songs.length} songs.`;
+        return `${this.name} by ${this.artist} has ${this.songs.length} songs. The total run time is ${this.totalRunTime}.`;
     }
 }
 
@@ -83,7 +85,9 @@ class Menu {
     displayAlbums() {
         let albumString = '';
         for (let i = 0; i < this.albums.length; i++) {
-            albumString += i + ') ' + this.albums[i].name + '\n';
+            albumString += i + ') ' + 'Album: ' + this.albums[i].name + ' (# of Songs: ' + this.albums[i].songs.length + ')' + '\n' 
+            + '---- Artist: ' + this.albums[i].artist + '\n'
+            + '---- Total Run time:' + this.albums[i].totalRunTime + '\n';
         }
         alert(albumString)
     }
@@ -98,10 +102,11 @@ class Menu {
         let index = prompt("Enter the index of the album that you want to view:");
         if (index > -1 && index < this.albums.length) {
             this.selectedAlbum = this.albums[index];
-            let description = 'Album name: ' + this.selectedAlbum.name + '\n';
-            description += ' ' + this.selectedAlbum.describe() + '/n';
+            let description = 'Album name: ' + this.selectedAlbum.name + '\n'
+            'Artist: ' + this.selectedAlbum.artist + '\n';
+            description += ' ' + this.selectedAlbum.describe() + '\n';
             for (let i = 0; i < this.selectedAlbum.songs.length; i++) {
-                description += i + ') ' + this.selectedAlbum.songs[i].describe() + '\n';
+                description +='index: ' + i + ") " + this.selectedAlbum.songs[i].describe() + '\n';
             }
             let selection1 = this.showAlbumMenuOptions(description);
             switch (selection1) {
@@ -123,8 +128,8 @@ class Menu {
 
     createSong() {
         let name = prompt('Enter name for song: ');
-        let length = prompt('Enter length of song: ');
-        this.selectedAlbum.addSong(new Song(name, length));
+        let songLength = prompt('Enter length of song: ');
+        this.selectedAlbum.addSong(new Song(name, songLength));
     }
 
     deleteSong() {
