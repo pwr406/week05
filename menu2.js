@@ -67,6 +67,7 @@ class Menu {
                     break;
                 case '3':
                     this.deleteAlbum();
+                    break;
                 case '4':
                     this.displayAlbums();
                     break; 
