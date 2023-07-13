@@ -145,11 +145,20 @@ class Menu {
             this.albums.splice(index,1);
         }
     }
-        //created create song method. Since prompts always return a string, used parseInt to make sure minutes and seconds returned an integer/
+        //created create song method. Since prompts always return a string, used parseInt to make sure minutes and seconds returned an integer. 
+        //created if statements to check to make sure an integer was entered - if it's not an integer, it prompts the user again. Used a while loop
+        //to continue to prompt the user to put in a number rather than a string.
     createSong() {
         let name = prompt('Enter name for song: ');
         let minutes = parseInt(prompt('Enter how many minutes the song has: '));
+        while (!Number.isInteger(minutes) ) {
+            minutes = parseInt(prompt( `That wasn't a number! Try again:`));
+            
+        }
         let seconds = parseInt(prompt('Enter how many seconds the song has: '));
+        while (!Number.isInteger(seconds)) {
+            seconds = parseInt(prompt( `That wasn't a number! Try again:`));
+        }
         this.selectedAlbum.addSong(new Song(name, minutes, seconds));
     }
         //created delete song method - needed to also have a way to reduce the run time of the album if a song was deleted. had to create a 
